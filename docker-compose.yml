@@ -1,0 +1,43 @@
+services:
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: iran-us-monitor:v6
+    container_name: iran-us-monitor
+    # 호스트 포트는 노출하지 않음 (Cloudflare Tunnel만 사용)
+    # 로컬 디버그가 필요하면 아래 주석 해제:
+    # ports:
+    #   - "8501:8501"
+    expose:
+      - "8501"  # 내부 네트워크 전용
+    volumes:
+      - ./data:/app/data:ro
+    restart: unless-stopped
+    networks:
+      - monitor_net
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    environment:
+      - TZ=Asia/Seoul
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: iran-us-cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${TUNNEL_TOKEN}
+    networks:
+      - monitor_net
+    depends_on:
+      dashboard:
+        condition: service_healthy
+    environment:
+      - TZ=Asia/Seoul
+
+networks:
+  monitor_net:
+    driver: bridge

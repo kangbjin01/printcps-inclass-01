@@ -1,0 +1,45 @@
+# 시크릿 ★ 절대 커밋 금지
+.env
+*.pem
+*.key
+
+# Python 환경
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 백업 (너무 크고 중복)
+backups/
+data_v6_snapshot/
+
+# 차트 임시 (노트북 실행시 재생성)
+preview/
+
+# 빌드 산물
+build/
+dist/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 임시
+/tmp/
+*.tmp
+*.bak

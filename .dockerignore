@@ -1,0 +1,36 @@
+# Python 부산물
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# Jupyter (대시보드만 필요, 노트북 제외)
+*.ipynb
+.ipynb_checkpoints/
+
+# 백업 폴더 (이미지에 포함 X)
+backups/
+preview/
+
+# 빌드 산출물
+build/
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# 로컬 환경 파일
+*.log
+/tmp/
